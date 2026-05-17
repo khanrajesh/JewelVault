@@ -1,5 +1,4 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -35,12 +34,6 @@ kotlin {
         binaries.executable()
     }
     
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser()
-        binaries.executable()
-    }
-    
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
@@ -48,6 +41,7 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqldelight.android.driver)
+            implementation(libs.moko.permissions)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -70,7 +64,6 @@ kotlin {
             implementation(libs.multiplatform.settings)
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.screenmodel)
-            implementation(libs.moko.permissions)
             implementation(libs.kamel.image)
         }
         commonTest.dependencies {
@@ -79,6 +72,7 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sqldelight.native.driver)
+            implementation(libs.moko.permissions)
         }
         jsMain.dependencies {
             implementation(libs.ktor.client.js)
@@ -88,9 +82,6 @@ kotlin {
             implementation(libs.kotlinx.coroutinesSwing)
             implementation(libs.ktor.client.cio)
             implementation(libs.sqldelight.sqlite.driver)
-        }
-        wasmJsMain.dependencies {
-            implementation(libs.ktor.client.js)
         }
     }
 }
